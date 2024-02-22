@@ -31,10 +31,21 @@ net = train(net,input.',output.');
 
 %%
 
-for k = 1:(length(t)-1)
-    ynn(:,k) = net(y(k,:)');
-end
+for m = 1:1%0
+    x0=30*(rand(3,1)-0.5);
+    [t,y] = ode45(Lorenz,t,x0);
+    
+    ynn(:,1) = net(x0);
+    for k = 2:(length(t)-1)
+        ynn(:,k) = net(ynn(:,k-1));
+    end
 
-figure
-plot3(y(:,1),y(:,2),y(:,3)); hold on
-plot3(ynn(1,:),ynn(2,:),ynn(3,:));
+    figure(2)
+    plot3(y(:,1),y(:,2),y(:,3)); hold on
+    plot3(ynn(1,:),ynn(2,:),ynn(3,:));
+    plot3(x0(1),x0(2),x0(3),'ro')
+    
+    figure(3), hold on
+    plot(t(2:end),y(2:end,1)), plot(t(2:end),ynn(1,:)')
+    %plot(t(2:end),y(2:end,1)-ynn(1,:)')
+end
