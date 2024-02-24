@@ -17,7 +17,7 @@ for j=1:100     %training trajectories
     input=[input; y(1:end-1,:)];
     output=[output; y(2:end,:)];
     plot3(y(:,1),y(:,2),y(:,3), 'Color', [0 (0.447-j/300) (0.741-j/300)]),hold on
-    plot3(x0(1),x0(2),x0(3),'ro','Color',[0 (0.85-j/200) 1])
+    plot3(x0(1),x0(2),x0(3),'ro','Color',[0 (0.447-j/300) (0.741-j/300)])
 end
 
 grid on, view(-23,18)
@@ -40,7 +40,7 @@ for m = 1:1%0
         ynn(:,k) = net(ynn(:,k-1));
     end
     
-    %figure(2)
+%        figure(2)
 %        plot3(y(:,1),y(:,2),y(:,3)); hold on
 %        plot3(ynn(1,:),ynn(2,:),ynn(3,:));
 %        plot3(x0(1),x0(2),x0(3),'ro')
@@ -50,8 +50,8 @@ for m = 1:1%0
         plot3(y(1:k,1),y(1:k,2),y(1:k,3)); hold on
         plot3(ynn(1,1:k),ynn(2,1:k),ynn(3,1:k));
         plot3(x0(1),x0(2),x0(3),'ro'); 
-        plot3(y(k,1),y(k,2),y(k,3),'.','Color','#0072BD');
-        plot3(ynn(1,k),ynn(2,k),ynn(3,k),'.','Color','#D95319');hold off
+        plot3(y(k,1),y(k,2),y(k,3),'.','Color','#0072BD','MarkerSize',15);
+        plot3(ynn(1,k),ynn(2,k),ynn(3,k),'.','Color','#D95319','MarkerSize',15);hold off
         pause(0.01)
     end
     
@@ -60,5 +60,5 @@ for m = 1:1%0
     subplot(2,2,1), plot(t(1:end),y(1:end,1)), hold on, plot(t(1:end),ynn(1,:)')
     subplot(2,2,2), plot(t(1:end),y(1:end,2)), hold on, plot(t(1:end),ynn(2,:)')
     subplot(2,2,3), plot(t(1:end),y(1:end,3)), hold on, plot(t(1:end),ynn(3,:)')
-    subplot(2,2,4), plot(t(1:end),y(1:end,1)-ynn(1,:)'), hold off
+    subplot(2,2,4), plot(t(1:end),y(1:end,1)-ynn(1,:)'+y(1:end,2)-ynn(2,:)'+y(1:end,3)-ynn(3,:)')
 end
