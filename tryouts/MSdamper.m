@@ -61,7 +61,7 @@ for m = 1:1%0
     
     
     figure(3)
-    subplot(2,2,1), plot(t(1:end),y(1:end,1)), hold on, plot(t(1:end),ynn(1,:)')
-    subplot(2,2,2), plot(t(1:end),y(1:end,2)), hold on, plot(t(1:end),ynn(2,:)')
-    subplot(2,2,4), plot(t(1:end),y(1:end,1)-ynn(1,:)'+y(1:end,2)-ynn(2,:)')
+    subplot(2,2,1), plot(t(1:end),y(1:end,1)), hold on, plot(t(1:end),ynn(1,:)'), hold off
+    subplot(2,2,2), plot(t(1:end),y(1:end,2)), hold on, plot(t(1:end),ynn(2,:)'), hold off
+    subplot(2,2,4), plot(t(1:end),sqrt((y(1:end,1)-ynn(1,:)').^2+(y(1:end,2)-ynn(2,:)').^2))%, hold on, plot(t(1:end),((y(:,1)-ynn(1,:)'+y(:,2)-ynn(2,:)').^2)./(y(:,1)+y(:,2))), hold off
 end
