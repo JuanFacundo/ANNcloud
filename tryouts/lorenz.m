@@ -32,7 +32,45 @@ net = train(net,input.',output.');
 %%
 
 for m = 1:1%0
-    x0=30*(rand(3,1)-0.5);%[0.592547396312769;12.933728823930911;-10.768137475687244]
+    %x0 = [0.592547396312769;12.933728823930911;-10.768137475687244]
+    %x0 = [-12.658317485078042;-1.127982746790025;-11.189140645072510]
+    x0=30*(rand(3,1)-0.5);
+    [t,y] = ode45(Lorenz,t,x0);
+    
+    ynn(:,1) = x0;
+    for k = 2:(length(t))
+        ynn(:,k) = net(y(k-1,:)');
+    end
+    
+%        figure(2)
+%        plot3(y(:,1),y(:,2),y(:,3)); hold on
+%        plot3(ynn(1,:),ynn(2,:),ynn(3,:));
+%        plot3(x0(1),x0(2),x0(3),'ro')
+    
+    for k = 1:length(ynn)
+        figure(2)
+        plot3(y(1:k,1),y(1:k,2),y(1:k,3)); hold on
+        plot3(ynn(1,1:k),ynn(2,1:k),ynn(3,1:k));
+        plot3(x0(1),x0(2),x0(3),'ro'); 
+        plot3(y(k,1),y(k,2),y(k,3),'.','Color','#0072BD','MarkerSize',15);
+        plot3(ynn(1,k),ynn(2,k),ynn(3,k),'.','Color','#D95319','MarkerSize',15);hold off
+        grid on
+        pause(0.01)
+    end
+    
+    
+    figure(3)
+    subplot(2,2,1), plot(t(1:end),y(1:end,1)), hold on, plot(t(1:end),ynn(1,:)')
+    subplot(2,2,2), plot(t(1:end),y(1:end,2)), hold on, plot(t(1:end),ynn(2,:)')
+    subplot(2,2,3), plot(t(1:end),y(1:end,3)), hold on, plot(t(1:end),ynn(3,:)')
+    subplot(2,2,4), plot(t(1:end),sqrt((y(1:end,1)-ynn(1,:)').^2+(y(1:end,2)-ynn(2,:)').^2+(y(1:end,3)-ynn(3,:)').^2))
+end
+%%
+
+for m = 1:1%0
+    %x0 = [0.592547396312769;12.933728823930911;-10.768137475687244]
+    x0 = [-12.658317485078042;-1.127982746790025;-11.189140645072510]
+    x0=30*(rand(3,1)-0.5);
     [t,y] = ode45(Lorenz,t,x0);
     
     ynn(:,1) = x0;
@@ -52,6 +90,7 @@ for m = 1:1%0
         plot3(x0(1),x0(2),x0(3),'ro'); 
         plot3(y(k,1),y(k,2),y(k,3),'.','Color','#0072BD','MarkerSize',15);
         plot3(ynn(1,k),ynn(2,k),ynn(3,k),'.','Color','#D95319','MarkerSize',15);hold off
+        grid on
         pause(0.01)
     end
     
