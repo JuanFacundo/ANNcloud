@@ -245,7 +245,7 @@ for i=1:length(input)
     input3(i,9) = input(i,3)^3;
 end
 
-net5 = feedforwardnet([20 20 20]);
+net5 = feedforwardnet([15 15 15]);
 net5.layers{1}.transferFcn = 'poslin';
 net5.layers{2}.transferFcn = 'poslin';
 net5.layers{3}.transferFcn = 'poslin';

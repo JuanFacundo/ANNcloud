@@ -1,0 +1,51 @@
+Reinforcement Learning Methods
+
+ - Monte Carlo Method:
+    Model free method that learns from experience. Best suited for episodic problems, Monte Carlo
+    involves doing random paths and state-action sequences and keeping track. Then the agent updates
+    its value function based on the average rewards obtained for each state-action pair.
+
+ - Temporal Difference Method:
+    Temporal difference (TD) method is another model-free method that leatns from experience. In
+    TD learning, the agent updates its value function based on the difference between the predicted
+    and actual reward. TD methods are suitable for problems with continuous tasks.
+
+ - Q-learning:
+    Q-learning is a model-free reinforcement learning algorith that learns the optimal policy by
+    updating the Q-values for each state-action pair. The agent selects the action with the
+    highest Q-value for a given state. Q-learning is suitable for problems with finate states
+    and actions.
+
+ - Deep Q-Networks:
+    DQNs combine RL with deep neural networks. DQNs learn the optimal policy by approximating the
+    Q-values usig a deep neural network. DQNs are suitable for problems with high-dimensional
+    state spaces like image-based games.
+
+ - Actor-Critic:
+    Actor-Critic is a model based reinforcement learning algorithm that uses two networks: an actor
+    and a critic. The actor network selects the actions, while the critic network evaluates the
+    actions taken by the actor. Actor-Critic is suitable for problems with continuous action spaces.
+
+
+ - - - - - - - - - - - - -
+
+ - Replay Memory
+    Replay Memory is a technique used in RL to store and manage the experiences of an agent during
+    training. The idea is to store the agent's experiences as a sequence of 
+    (state, action, reward, next_state) tuples, which are collected as the agent interacts with the
+    environment. During training, these experiences are used to update the agent's policy and value
+    function.
+
+    The RM allows the agent to learn from past experiences by randomlu sampling a batch of 
+    experiences from the memory buffer, rather than just learning from the most recent experience.
+    This helps reduce the correlation between subsequent experiences, which can improve the stability
+    and convergence of the learning algorithm. In addition, by storing experiences in a buffer, the
+    agent can re-use past experiences to update its policy and value function multiple times, which
+    can further improve learning efficiency.
+
+    The RM is typically implemented as a fixed-size buffer or queue that stores the most recent
+    experiences. When the buffer is full, new experiences overview the oldest experiences in the
+    buffer. During training, a batch of experiences is randomly sampled from the buffe and used to
+    update the agent's policy and value function. The process is repeated iteratively until the agent
+    converges to an optimal policy.
+    
