@@ -84,7 +84,7 @@ def getLoss(exps, gamma, Qnet, sameQnet):
     """
 
     s, a, r, s_next, isDone = exps  #unfold
-    
+
     maxQsa = tf.reduce_max(sameQnet(s_next), axis=-1)
 
     #set y = R if episode terminates, otherwise set y = R + γ max Q^(s,a).
@@ -95,8 +95,7 @@ def getLoss(exps, gamma, Qnet, sameQnet):
     #get the q values and reshape it to match the y_targets
     q_values = Qnet(s)
     q_values = tf.gather_nd(q_values, tf.stack([ tf.range(q_values.shape[0]),
-                                                tf.cast(a, tf.int32) ], axis=1))
-    
+                                                tf.cast(a, tf.int32) ], axis=1)) #un quilombo pero acá agarra y extrae solo los valores que competen    
 
     loss = MSE(y_targets,q_values)
 
@@ -281,7 +280,6 @@ for i in range(N_eps):
             Qlearn(experiences, GAMMA)
             # update the wights of the target Q'net
             mirrorQnet.set_weights(Qnetwork.get_weights())
-            #mirrorQnet = clone_model(Qnetwork)
 
         state = nextState.copy()
         totalPts += r
